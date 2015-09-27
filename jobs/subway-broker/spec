@@ -11,6 +11,8 @@ templates:
 properties:
   subway_broker.backend_brokers:
     description: Array of URIs for backend CF brokers with embedded basic auth, e.g. http://user:pass@10.10.10.10
+  subway_broker.backends:
+    description: "Structure of common backend info, plus hosts: is an array of IPs/hostnames, see README"
   subway_broker.port:
     description: Port for broker to listen
     default: 8000

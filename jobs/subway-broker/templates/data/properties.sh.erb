@@ -9,8 +9,21 @@ export JOB_INDEX=<%= index %>
 # full job name, like redis/0 or webapp/3
 export JOB_FULL="$NAME/$JOB_INDEX"
 
-<% p("subway_broker.backend_brokers").each_with_index do |backend_host, index| %>
+<% if_p("subway_broker.backend_brokers") do |backend_brokers| %>
+  <% backend_brokers.each_with_index do |backend_host, index| %>
 export BACKEND_BROKER_<%= index %>=<%= backend_host %>
+  <% end %>
+<% end %>
+
+<% if_p("subway_broker.backends") do |backends| %>
+  <% backends["hosts"].each_with_index do |backend_host, index| %>
+    <% port = backends["port"] %>
+    <% if port == 80 || port == 443 || port == "" %>
+export BACKEND_BROKER_<%= index %>=<%= backends["protocol"] %>://<%= backends["username"] %>:<%= backends["password"] %>@<%= backend_host %>
+    <% else %>
+export BACKEND_BROKER_<%= index %>=<%= backends["protocol"] %>://<%= backends["username"] %>:<%= backends["password"] %>@<%= backend_host %>:<%= port %>
+    <% end %>
+  <% end %>
 <% end %>
 
 export PORT=<%= p("subway_broker.port") %>

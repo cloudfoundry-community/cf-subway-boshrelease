@@ -33,11 +33,38 @@ properties:
     backend_brokers:
     - https://warreng:natedogg@haash-broker-1.cfapps.io
     - https://warreng:natedogg@haash-broker-2.cfapps.io
+    backends: ~
     port: 8000
     username: secretusername
     password: secretpassword
 EOS
+```
 
+Alternately, provide list of IPs/hostnames:
+
+```
+cat > tmp/my-brokers.yml <<-EOS
+---
+properties:
+  subway_broker:
+    backend_brokers: ~
+    backends:
+      hosts:
+      - haash-broker-1.cfapps.io
+      - haash-broker-2.cfapps.io
+      username: warreng
+      password: natedogg
+      protocol: https
+      port: 443
+    port: 8000
+    username: secretusername
+    password: secretpassword
+EOS
+```
+
+Then build the BOSH manifest using the `templates/make_manifest` helper, and deploy:
+
+```
 templates/make_manifest warden tmp/my-brokers.yml
 bosh -n deploy
 ```

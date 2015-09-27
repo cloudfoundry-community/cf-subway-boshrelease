@@ -1,6 +1,6 @@
 ---
 name: just_install_packages
-packages: []
+packages: [cf-subway]
 templates:
   ignoreme: ignoreme
 properties: {}

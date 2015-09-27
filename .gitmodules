@@ -1,0 +1,3 @@
+[submodule "src/cf-subway"]
+	path = src/cf-subway
+	url = https://github.com/cloudfoundry-community/cf-subway

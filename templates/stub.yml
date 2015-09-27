@@ -1,0 +1,14 @@
+---
+meta:
+  environment: NAME
+  dns_root: microbosh
+  security_groups:
+    - cf_subway
+  stemcell:
+    name: STEMCELL
+
+director_uuid: PLACEHOLDER-DIRECTOR-UUID
+
+releases:
+  - name: cf-subway
+    version: latest

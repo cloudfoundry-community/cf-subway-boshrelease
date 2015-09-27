@@ -33,6 +33,7 @@ properties:
     backend_brokers:
     - https://warreng:natedogg@haash-broker-1.cfapps.io
     - https://warreng:natedogg@haash-broker-2.cfapps.io
+    port: 8000
     username: secretusername
     password: secretpassword
 EOS
@@ -42,3 +43,5 @@ bosh -n deploy
 ```
 
 Once deployed, the Subway broker can be registered with `secretusername` and `secretpassword` as its username/password (based on example above).
+
+The default port is `8000`.

@@ -1,0 +1,20 @@
+---
+name: subway-broker
+packages:
+- cf-subway
+templates:
+  bin/ctl: bin/ctl
+  bin/monit_debugger: bin/monit_debugger
+  data/properties.sh.erb: data/properties.sh
+  helpers/ctl_setup.sh: helpers/ctl_setup.sh
+  helpers/ctl_utils.sh: helpers/ctl_utils.sh
+properties:
+  subway_broker.backend_brokers:
+    description: Array of URIs for backend CF brokers with embedded basic auth, e.g. http://user:pass@10.10.10.10
+  subway_broker.port:
+    description: Port for broker to listen
+    default: 8000
+  subway_broker.username:
+    description: Basic auth username for Cloud Foundry to connect to Subway broker API
+  subway_broker.password:
+    description: Basic auth password for Cloud Foundry to connect to Subway broker API

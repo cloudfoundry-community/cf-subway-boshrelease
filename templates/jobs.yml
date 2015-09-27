@@ -9,9 +9,9 @@ update:
   serial: false
 
 jobs:
-  - name: just_install_packages
+  - name: subway-broker
     templates:
-    - name: just_install_packages
+    - name: subway-broker
       release: cf-subway
     instances: 1
     persistent_disk: 0
@@ -20,4 +20,8 @@ jobs:
 
 networks: (( merge ))
 
-properties: {}
+properties:
+  subway_broker:
+    backend_brokers: (( merge ))
+    username: (( merge ))
+    password: (( merge ))

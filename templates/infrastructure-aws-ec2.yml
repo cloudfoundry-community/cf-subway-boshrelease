@@ -9,7 +9,7 @@ meta:
     version: latest
 
 jobs:
-  - name: just_install_packages
+  - name: subway-broker
     networks:
       - name: cf_subway1
     persistent_disk: (( meta.persistent_disk ))

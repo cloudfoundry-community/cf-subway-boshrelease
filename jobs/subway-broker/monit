@@ -1,0 +1,5 @@
+check process subway-broker
+  with pidfile /var/vcap/sys/run/subway-broker/subway-broker.pid
+  start program "/var/vcap/jobs/subway-broker/bin/monit_debugger ctl '/var/vcap/jobs/subway-broker/bin/ctl start'"
+  stop program "/var/vcap/jobs/subway-broker/bin/monit_debugger ctl '/var/vcap/jobs/subway-broker/bin/ctl stop'"
+  group vcap

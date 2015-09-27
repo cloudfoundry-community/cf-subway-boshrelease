@@ -1,76 +1,44 @@
-# BOSH Release for cf-subway
+BOSH release for Subway
+=======================
 
-## Usage
+A subway to scale out Cloud Foundry Service Brokers.
+
+```
+________   ______________________>__
+[]_[]||[| |]||[]_[]_[]|||[]_[]_[]||[|
+===o-o==/_\==o-o======o-o======o-o==/______
+:::::::::::::::::::::::::::::::::::::::::::
+```
+
+Subway is a multiplexing service broker that allows you to scale out single node brokers, such as cf-containers-broker/docker-boshrelease and cf-redis-broker/cf-redis-release.
+
+-	Project https://github.com/cloudfoundry-community/cf-subway
+
+Usage
+-----
 
 To use this bosh release, first upload it to your bosh:
 
 ```
-bosh target BOSH_HOST
-git clone https://github.com/cloudfoundry-community/cf-subway-boshrelease.git
-cd cf-subway-boshrelease
-bosh upload release releases/cf-subway-1.yml
+bosh upload release https://bosh.io/d/github.com/cloudfoundry-community/cf-subway-boshrelease
 ```
 
-For [bosh-lite](https://github.com/cloudfoundry/bosh-lite), you can quickly create a deployment manifest & deploy a cluster:
+For [bosh-lite](https://github.com/cloudfoundry/bosh-lite), you can quickly create a deployment manifest & deploy a node for a given set of backend brokers:
 
 ```
-templates/make_manifest warden
-bosh -n deploy
-```
-
-For AWS EC2, create a single VM:
-
-```
-templates/make_manifest aws-ec2
-bosh -n deploy
-```
-
-### Override security groups
-
-For AWS & Openstack, the default deployment assumes there is a `default` security group. If you wish to use a different security group(s) then you can pass in additional configuration when running `make_manifest` above.
-
-Create a file `my-networking.yml`:
-
-``` yaml
+cat > tmp/my-brokers.yml <<-EOS
 ---
-networks:
-  - name: cf-subway1
-    type: dynamic
-    cloud_properties:
-      security_groups:
-        - cf-subway
-```
+properties:
+  subway_broker:
+    backend_brokers:
+    - https://warreng:natedogg@haash-broker-1.cfapps.io
+    - https://warreng:natedogg@haash-broker-2.cfapps.io
+    username: secretusername
+    password: secretpassword
+EOS
 
-Where `- cf-subway` means you wish to use an existing security group called `cf-subway`.
-
-You now suffix this file path to the `make_manifest` command:
-
-```
-templates/make_manifest openstack-nova my-networking.yml
+templates/make_manifest warden tmp/my-brokers.yml
 bosh -n deploy
 ```
 
-### Development
-
-As a developer of this release, create new releases and upload them:
-
-```
-bosh create release --force && bosh -n upload release
-```
-
-### Final releases
-
-To share final releases:
-
-```
-bosh create release --final
-```
-
-By default the version number will be bumped to the next major number. You can specify alternate versions:
-
-
-```
-bosh create release --final --version 2.1
-```
-
-After the first release you need to contact [Dmitriy Kalinin](mailto://dkalinin@pivotal.io) to request your project is added to https://bosh.io/releases (as mentioned in README above).
+Once deployed, the Subway broker can be registered with `secretusername` and `secretpassword` as its username/password (based on example above).

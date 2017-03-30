@@ -1,7 +1,8 @@
----
 builds:
-  90a7eaae-ba86-4318-9496-add82db8e83d:
-    version: '1'
+  668a9e4d-e90c-43ae-541e-a4510ad633a4:
+    version: 3.0.0
   8dac7353-a5e9-44b5-b19d-e2a7f8e72e8a:
-    version: '2'
-format-version: '2'
+    version: "2"
+  90a7eaae-ba86-4318-9496-add82db8e83d:
+    version: "1"
+format-version: "2"

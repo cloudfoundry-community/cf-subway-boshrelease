@@ -12,9 +12,17 @@ instance_groups:
   - name: subway-broker
     release: cf-subway
     consumes:
-      servicebroker:
+      backend:
         from: servicebroker
         deployment: docker-broker
+    properties:
+      username: broker
+      password: ((subway-broker-password))
+      name: ((subway-broker-name))
+
+variables:
+- name: subway-broker-password
+  type: password
 
 stemcells:
 - alias: default

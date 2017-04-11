@@ -9,11 +9,27 @@ templates:
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
 
+provides:
+- name: subway
+  type: servicebroker
+  properties:
+  - username
+  - password
+  - port
+  - name
+
 consumes:
-- name: servicebroker
+- name: backend
   type: servicebroker
 
 properties:
+  username:
+    description: "Broker's basic auth username"
+  password:
+    description: "Broker's basic auth password"
   port:
     description: Port for broker to listen
     default: 8000
+  name:
+    description: Name to register broker with Cloud Foundry, etc
+    default: subway-broker

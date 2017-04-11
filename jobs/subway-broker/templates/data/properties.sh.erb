@@ -1,17 +1,16 @@
 #!/usr/bin/env bash
 
+export PORT=<%= p("port") %>
+export SUBWAY_USERNAME=<%= p("username") %>
+export SUBWAY_PASSWORD=<%= p("password") %>
 
 <%
-  port = p("port")
-  broker = link("servicebroker")
-  broker_port = broker.p("port")
+  broker = link("backend")
+  port = broker.p("port")
   protocol = broker.p("protocol", broker.p("ssl_enabled", false) ? "https" : "http")
   username = broker.p("username")
   password = broker.p("password")
 -%>
-export PORT=<%= port %>
-export SUBWAY_USERNAME=<%= username %>
-export SUBWAY_PASSWORD=<%= password %>
-<% link("servicebroker").instances.each_with_index do |instance, index| -%>
-export BACKEND_BROKER_<%= index %>=<%= "#{protocol}://#{username}:#{password}@#{instance.address}:#{broker_port}" %>
+<% broker.instances.each_with_index do |instance, index| -%>
+export BACKEND_BROKER_<%= index %>=<%= "#{protocol}://#{username}:#{password}@#{instance.address}:#{port}" %>
 <% end -%>

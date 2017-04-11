@@ -1,0 +1,25 @@
+name: cf-subway
+version: 3.1.0
+commit_hash: 63c3706
+uncommitted_changes: false
+jobs:
+- name: subway-broker
+  version: ccd19849e1d7c59653854b667b46bbad8a33d98d
+  fingerprint: ccd19849e1d7c59653854b667b46bbad8a33d98d
+  sha1: 4628f21f69a31daf66578a63f5e7b47003bfb355
+packages:
+- name: cf-subway
+  version: 5aabdc4c80c47d35cdb40c9e39407c361051c765
+  fingerprint: 5aabdc4c80c47d35cdb40c9e39407c361051c765
+  sha1: 8230417c228f204987e30fbb7672d0072955a9a2
+  dependencies:
+  - golang-1.5
+- name: golang-1.5
+  version: 0602b57071fe6222933892ccc25a331574f55b3f
+  fingerprint: 0602b57071fe6222933892ccc25a331574f55b3f
+  sha1: fbb566a3182c6245b27983a50af7fa2ec4147985
+  dependencies: []
+license:
+  version: 5413b0e2da9e3992fb7d3f2da98b2b306e28d594
+  fingerprint: 5413b0e2da9e3992fb7d3f2da98b2b306e28d594
+  sha1: 935ecc33b18f68d3ce5a1d0a7e1cbf3cc8f56ef1

@@ -6,10 +6,10 @@ export SUBWAY_PASSWORD=<%= p("password") %>
 
 <%
   backend = link("backend")
-  port = broker.p("port")
-  protocol = broker.p("protocol", broker.p("ssl_enabled", false) ? "https" : "http")
-  username = broker.p("username")
-  password = broker.p("password")
+  port = backend.p("port")
+  protocol = backend.p("protocol", backend.p("ssl_enabled", false) ? "https" : "http")
+  username = backend.p("username")
+  password = backend.p("password")
 -%>
 <% backend.instances.each_with_index do |instance, index| -%>
 export BACKEND_BROKER_<%= index %>=<%= "#{protocol}://#{username}:#{password}@#{instance.address}:#{port}" %>

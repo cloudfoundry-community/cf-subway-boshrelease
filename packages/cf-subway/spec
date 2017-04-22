@@ -1,4 +1,4 @@
 ---
 name: cf-subway
-dependencies: [golang-1.5]
+dependencies: [golang]
 files: [cf-subway/**/*]

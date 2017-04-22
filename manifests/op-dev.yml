@@ -1,0 +1,6 @@
+---
+- type: replace
+  path: /releases/name=cf-subway
+  value:
+    name: cf-subway
+    version: latest

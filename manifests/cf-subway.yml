@@ -13,8 +13,12 @@ instance_groups:
     release: cf-subway
     consumes:
       backend:
-        from: servicebroker
-        deployment: docker-broker
+        from: ((backend-broker))
+        deployment: ((backend-deployment))
+    provides:
+      subway:
+        as: broker
+        shared: true
     properties:
       username: broker
       password: ((subway-broker-password))

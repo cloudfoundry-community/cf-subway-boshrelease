@@ -42,6 +42,6 @@ update:
 
 releases:
 - name: cf-subway
-  version: 3.0.0
-  url: https://bosh.io/d/github.com/cloudfoundry-community/cf-subway-boshrelease?v=3.0.0
-  sha1: 4e241dff1552e626e0677941da69944eafeca1ff
+  version: 3.2.0
+  url: https://bosh.io/d/github.com/cloudfoundry-community/cf-subway-boshrelease?v=3.2.0
+  sha1: 57de13d5a7b4709c065b6f909cd86372badfe2da

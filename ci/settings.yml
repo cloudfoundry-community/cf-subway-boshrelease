@@ -37,7 +37,7 @@ meta:
     tag: "8"
 
   manifest:
-    vars: (( concat
-      "\nsubway-broker-name=cf-subway-testflight"
-      "\nbackend-deployment=TODO"
-      "\nbackend-broker=TODO" ))
+    vars: |-
+      subway-broker-name=cf-subway-testflight
+      backend-deployment=testflight-docker-broker
+      backend-broker=broker

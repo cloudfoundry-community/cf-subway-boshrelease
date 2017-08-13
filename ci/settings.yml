@@ -7,6 +7,7 @@ meta:
   initial_version: 3.3.0
 
   aws:
+    bucket: cf-subway-boshrelease
     access_key: (( vault "secret/aws/cfcommunity:access" ))
     secret_key: (( vault "secret/aws/cfcommunity:secret" ))
 

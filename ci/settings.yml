@@ -38,5 +38,6 @@ meta:
 
   manifest:
     vars: (( concat
+      "\nsubway-broker-name=cf-subway-testflight"
       "\nbackend-deployment=TODO"
       "\nbackend-broker=TODO" ))

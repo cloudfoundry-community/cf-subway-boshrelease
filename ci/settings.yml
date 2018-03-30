@@ -1,27 +1,28 @@
 ---
 meta:
-  name: cf-subway
-  target: sw
-  url: https://ci.starkandwayne.com
+  name:    cf-subway
+  target:  ohio-cf
+  url:     https://ci2.starkandwayne.com
+
+  test-errand: ~
 
   initial_version: 3.3.0
 
-  aws:
-    bucket: cf-subway-boshrelease
-    access_key: (( vault "secret/aws/cfcommunity:access" ))
-    secret_key: (( vault "secret/aws/cfcommunity:secret" ))
+  manifest:
+    vars: |-
+      subway-broker-name=cf-subway-testflight
+      backend-deployment=testflight-docker-broker
+      backend-broker=broker
 
-  github:
-    owner: cloudfoundry-community
-    repo: cf-subway-boshrelease
-    private_key:  (( vault "secret/pipelines/shared/github:private_key" ))
-    access_token: (( vault "secret/pipelines/shared/github:access_token" ))
+  git:
+    email:  ((git-commit-email))
+    name:   ((git-commit-name))
 
   bosh-lite:
-    target: https://10.58.111.49:25555
-    username: (( vault "secret/bosh-lites/lite49/users/admin:username" ))
-    password: (( vault "secret/bosh-lites/lite49/users/admin:password" ))
-    cacert:   (( vault "secret/bosh-lites/lite49/certs:rootCA.pem" ))
+    target:   ((bosh-lite-environment))
+    cacert:   ((bosh-lite-ca-cert))
+    username: ((bosh-lite-client))
+    password: ((bosh-lite-client-secret))
     cf:
       api_url: (( vault "secret/bosh-lites/lite49" "/cf:api_url" ))
       system_domain: (( vault "secret/bosh-lites/lite49" "/cf:system_domain" ))
@@ -29,16 +30,23 @@ meta:
       password: (( vault "secret/bosh-lites/lite49" "/cf:admin_password" ))
       skip_ssl_validation: (( vault "secret/bosh-lites/lite49" "/cf:skip_ssl_validation" ))
 
+  aws:
+    bucket:      (( grab meta.pipeline ))
+    region_name: us-east-1
+    access_key:  ((aws-access-key))
+    secret_key:  ((aws-secret-key))
+
+  github:
+    owner:  cloudfoundry-community
+    repo:   (( grab meta.pipeline ))
+    branch: master
+    private_key:  ((github-private-key))
+    access_token: ((github-access-token))
+
   slack:
-    channel: Please specify the channel (#name) or user (@user) to send messages to
-    webhook: Please specify your Slack Incoming Webhook Integration URL
-
-  image:
-    name: starkandwayne/concourse-java
-    tag: "8"
-
-  manifest:
-    vars: |-
-      subway-broker-name=cf-subway-testflight
-      backend-deployment=testflight-docker-broker
-      backend-broker=broker
+    webhook:       ((slack-webhook))
+    username:      ((slack-username))
+    icon:          ((slack-icon-url))
+    channel:       (( concat meta.name "-boshrelease" ))
+    blob_success:  '(( concat ": New version of  was detected, and updated in master. <" meta.url "/teams//pipelines/| Cut a new release?>" ))'
+    blob_failure:  '(( concat ": :airplane_arriving: <" meta.url "/teams//pipelines//jobs//builds/| Failed to update the blob for >" ))'

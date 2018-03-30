@@ -1,0 +1,15 @@
+- path: /releases/name=cf-subway/url
+  type: replace
+  value: "https://s3.amazonaws.com/cf-subway-boshrelease/compiled-releases/cf-subway-3.2.0-ubuntu-trusty-3541.10-20180330-231731-218489057-20180330231734.tgz"
+- path: /releases/name=cf-subway/version
+  type: replace
+  value: "3.2.0"
+- path: /releases/name=cf-subway/sha1
+  type: replace
+  value: "b53446e70a6bdb42d636d67d0db362c6e29732dd"
+
+- path: /releases/name=cf-subway/stemcell?
+  type: replace
+  value:
+    os: "ubuntu-trusty"
+    version: "3541.10"
